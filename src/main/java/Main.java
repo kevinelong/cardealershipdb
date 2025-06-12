@@ -7,9 +7,13 @@ public class Main {
     public static void main(String[] args) {
         db = new CRUD("localhost", "3306", "cardealership", "root", "S!mpl312");
         var data = new CarDealershipData(db);
-        var vehicles = data.getVehiclesByMakeModel(
-                ui.getString("MAKE"),
-                ui.getString("MODEL")
+//        var vehicles = data.getVehiclesByMakeModel(
+//                ui.getString("MAKE"),
+//                ui.getString("MODEL")
+//        );
+        var vehicles = data.getVehiclesByPriceRange(
+                ui.getDouble("MINIMUM PRICE"),
+                ui.getDouble("MAXIMUM PRICE")
         );
         vehicles.forEach(System.out::println);
     }

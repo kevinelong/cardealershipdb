@@ -15,4 +15,18 @@ public class UI {
         }
         return answer;
     }
+    Double getDouble(String question){
+        var in = new Scanner(System.in);
+        Double answer = null;
+        while(answer == null) {
+            System.out.printf("%s: ", question);
+            var text = in.nextLine();
+            try {
+                answer = Double.parseDouble(text);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input");
+            }
+        }
+        return answer;
+    }
 }

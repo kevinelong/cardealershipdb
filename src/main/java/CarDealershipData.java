@@ -49,7 +49,9 @@ public class CarDealershipData {
         }
         return list;
     }
-
+    ArrayList<Vehicle> getVehiclesByPriceRange(Double min, Double max) {
+        return getVehicles(String.format("PRICE >= %f AND PRICE <= %f", min, max));
+    }
     ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
         return getVehicles(String.format("MAKE LIKE '%%%s%%' AND MODEL LIKE '%%%s%%'", make, model));
     }
