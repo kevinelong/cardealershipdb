@@ -18,7 +18,8 @@ public class CarDealershipData {
                     recordSet.getString("MAKE"),
                     recordSet.getString("MODEL"),
                     recordSet.getString("COLOR"),
-                    recordSet.getInt("YEAR")
+                    recordSet.getInt("YEAR"),
+                    recordSet.getDouble("PRICE")
             );
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -50,7 +51,7 @@ public class CarDealershipData {
     }
 
     ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
-        return getVehicles(String.format("MAKE = '%s' AND MODEL = '%s'", make, model));
+        return getVehicles(String.format("MAKE LIKE '%%%s%%' AND MODEL LIKE '%%%s%%'", make, model));
     }
     /*
 1. By price range
