@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -6,6 +7,23 @@ public class CarDealershipData {
 
     CarDealershipData(CRUD db) {
         this.db = db;
+    }
+
+    Vehicle makeVehicle(ResultSet recordSet) {
+        Vehicle vehicle = null;
+        try {
+            vehicle = new Vehicle(
+                    recordSet.getInt("VEHICLE_ID"),
+                    recordSet.getString("VIN"),
+                    recordSet.getString("MAKE"),
+                    recordSet.getString("MODEL"),
+                    recordSet.getString("COLOR"),
+                    recordSet.getInt("YEAR")
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return vehicle;
     }
 
     ArrayList<Vehicle> getVehicles() {
@@ -21,15 +39,7 @@ public class CarDealershipData {
             )) {
                 hasRow = recordSet.next();
                 while (hasRow) {
-                    var vehicle = new Vehicle(
-                            recordSet.getInt("VEHICLE_ID"),
-                            recordSet.getString("VIN"),
-                            recordSet.getString("MAKE"),
-                            recordSet.getString("MODEL"),
-                            recordSet.getString("COLOR"),
-                            recordSet.getInt("YEAR")
-                    );
-                    list.add(vehicle);
+                    list.add(makeVehicle(recordSet));
                     hasRow = recordSet.next();
                 }
             }
@@ -38,6 +48,7 @@ public class CarDealershipData {
         }
         return list;
     }
+
     ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
         return getVehicles(String.format("MAKE = '%s' AND MODEL = '%s'", make, model));
     }
