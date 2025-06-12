@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -12,6 +13,20 @@ public class UI {
         while(answer == "") {
             System.out.printf("%s: ", question);
             answer = in.nextLine();
+        }
+        return answer;
+    }
+    LocalDate getDate(String question){
+        var in = new Scanner(System.in);
+        LocalDate answer = null;
+        while(answer == null) {
+            System.out.printf("%s (YYYY-MM-DD): ", question);
+            var text = in.nextLine();
+            try {
+                answer = LocalDate.parse(text);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input");
+            }
         }
         return answer;
     }

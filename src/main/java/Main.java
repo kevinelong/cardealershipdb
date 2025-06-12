@@ -9,8 +9,11 @@ public class Main {
         var data = new CarDealershipData(db);
 //        data.removeVehicle(15);
 
-        var vehicle = ui.makeCustomVehicle();
-        data.saveVehicle(vehicle);
+//        var vehicle = ui.makeCustomVehicle();
+//        data.saveVehicle(vehicle);
+
+        Contract c = ui.makeContract();
+        data.saveContract(c);
 
         //        Vehicle v = new Vehicle(
 //                -1,

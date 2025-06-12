@@ -77,6 +77,28 @@ public class CarDealershipData {
     ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
         return getVehicles(String.format("MAKE LIKE '%%%s%%' AND MODEL LIKE '%%%s%%'", make, model));
     }
+
+    public void saveContract(Contract c) {
+        String tableName = c instanceof SalesContract ? "sales_contracts" : "lease_contracts";
+        db.create(tableName,
+                new String[]{
+                        "CUSTOMER_NAME",
+                        "DEALERSHIP_ID",
+                        "VEHICLE_ID",
+                        "WHEN",
+                        "TOTAL_PRICE",
+                        "MONTHLY_PAYMENT"
+                },
+                new String[]{
+                        c.customer_name,
+                        c.dealership_id.toString(),
+                        c.vehicle_id.toString(),
+                        c.when.toString(),
+                        c.total_price.toString(),
+                        c.monthly_payment.toString()
+                }
+        );
+    }
     /*
 1. By price range
 2. By make/model
