@@ -64,6 +64,7 @@ public class CRUD {
         String quotedValues = quoteAll(values, "'");
 
         String sqlInsert = String.format("INSERT INTO %s (%s) VALUES (%s);", tableName, quotedFields, quotedValues);
+        System.out.println(sqlInsert);
 
         Integer affectedRowCount = null;
         try {
@@ -77,7 +78,7 @@ public class CRUD {
     //READ
     public ResultSet read(String sql) {
         ResultSet rs = null;
-
+        System.out.println(sql);
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException e) {

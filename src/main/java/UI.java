@@ -58,4 +58,21 @@ public class UI {
         }
         return answer;
     }
+    public void showMenu(ArrayList<MenuOption> options, String title) {
+        while(true) {
+            System.out.println(title);
+            for(var option : options) {
+                System.out.println(option.toString());
+            }
+            String choice = getString("ENTER CHOICE");
+            for(var option : options) {
+                if(choice.equals(option.key)){
+                    option.action.run();
+                }
+            }
+            if(choice.equals("0")) {
+                break; //exit while
+            }
+        }
+    }
 }

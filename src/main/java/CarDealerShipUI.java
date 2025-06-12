@@ -1,5 +1,36 @@
-public class CarDealerShipUI extends UI {
+import java.util.ArrayList;
 
+public class CarDealerShipUI extends UI {
+    CarDealershipData data;
+    CarDealerShipUI(CarDealershipData data) {
+        super();
+        this.data = data;
+    }
+
+    public void mainMenu() {
+        var options = new ArrayList<MenuOption>();
+        options.add(new MenuOption("0","Exit App", this::exitMenu));
+        options.add(new MenuOption("1","Add Vehicle", this::addVehicle));
+        options.add(new MenuOption("9","Admin Menu", this::adminMenu));
+        showMenu(options, "Main Menu");
+    }
+
+    public void adminMenu() {
+        var options = new ArrayList<MenuOption>();
+        options.add(new MenuOption("0","Exit Admin Menu", this::exitMenu));
+        options.add(new MenuOption("1","Show Statistics", this::showStats));
+        showMenu(options, "Admin Menu");
+    }
+
+    public void exitMenu() {
+        System.out.println("Exiting Menu");
+    }
+    public void showStats() {
+        System.out.println("STATISTICS");
+    }
+    public void addVehicle() {
+        var v = makeCustomVehicle();
+    }
     public Vehicle makeCustomVehicle() {
         return new Vehicle(
                 -1,
@@ -39,4 +70,5 @@ public class CarDealerShipUI extends UI {
             return null;
         }
     }
+
 }
