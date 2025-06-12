@@ -8,7 +8,29 @@ public class CarDealershipData {
     CarDealershipData(CRUD db) {
         this.db = db;
     }
-
+    void removeVehicle(Integer id){
+        db.delete("vehicles", id, "VEHICLE_ID");
+    }
+    void saveVehicle(Vehicle vehicle){
+        db.create("vehicles",
+                new String[]{
+                        "VIN",
+                        "MAKE",
+                        "MODEL",
+                        "COLOR",
+                        "YEAR",
+                        "PRICE",
+                },
+                new String[]{
+                        vehicle.vin,
+                        vehicle.make,
+                        vehicle.model,
+                        vehicle.color,
+                        vehicle.year.toString(),
+                        vehicle.price.toString(),
+                }
+        );
+    }
     Vehicle makeVehicle(ResultSet recordSet) {
         Vehicle vehicle = null;
         try {

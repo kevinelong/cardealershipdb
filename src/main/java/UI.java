@@ -29,4 +29,18 @@ public class UI {
         }
         return answer;
     }
+    Integer getInteger(String question){
+        var in = new Scanner(System.in);
+        Integer answer = null;
+        while(answer == null) {
+            System.out.printf("%s: ", question);
+            var text = in.nextLine();
+            try {
+                answer = Integer.parseInt(text);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input");
+            }
+        }
+        return answer;
+    }
 }
