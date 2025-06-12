@@ -1,0 +1,52 @@
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class CarDealershipData {
+    CRUD db;
+
+    CarDealershipData(CRUD db) {
+        this.db = db;
+    }
+
+    ArrayList<Vehicle> getVehicles() {
+        return getVehicles("1");
+    }
+
+    ArrayList<Vehicle> getVehicles(String criteria) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        boolean hasRow = false;
+        try {
+            try (var recordSet = db.read(
+                    String.format("SELECT * FROM Vehicles WHERE %s", criteria)
+            )) {
+                hasRow = recordSet.next();
+                while (hasRow) {
+                    var vehicle = new Vehicle(
+                            recordSet.getInt("VEHICLE_ID"),
+                            recordSet.getString("VIN"),
+                            recordSet.getString("MAKE"),
+                            recordSet.getString("MODEL"),
+                            recordSet.getString("COLOR"),
+                            recordSet.getInt("YEAR")
+                    );
+                    list.add(vehicle);
+                    hasRow = recordSet.next();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+    ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        return getVehicles(String.format("MAKE = '%s' AND MODEL = '%s'", make, model));
+    }
+    /*
+1. By price range
+2. By make/model
+3. By year range
+4. By color
+5. By mileage range
+6. By type
+     */
+}
