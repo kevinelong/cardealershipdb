@@ -11,6 +11,7 @@ public class CarDealerShipUI extends UI {
         var options = new ArrayList<MenuOption>();
         options.add(new MenuOption("0","Exit App", this::exitMenu));
         options.add(new MenuOption("1","Add Vehicle", this::addVehicle));
+        options.add(new MenuOption("2","Show All Vehicles", this::showAllVehicles));
         options.add(new MenuOption("9","Admin Menu", this::adminMenu));
         showMenu(options, "Main Menu");
     }
@@ -30,6 +31,10 @@ public class CarDealerShipUI extends UI {
     }
     public void addVehicle() {
         var v = makeCustomVehicle();
+    }
+    public void showAllVehicles() {
+        System.out.println("ALL VEHICLES");
+        data.getVehicles().forEach(System.out::println);
     }
     public Vehicle makeCustomVehicle() {
         return new Vehicle(
